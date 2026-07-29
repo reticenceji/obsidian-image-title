@@ -1,4 +1,4 @@
-import { Plugin, createEl } from 'obsidian';
+import { Plugin } from 'obsidian';
 import {
   DEFAULT_SETTINGS,
   ImageTitleSettingTab,
@@ -14,24 +14,24 @@ export default class ImageTitlePlugin extends Plugin {
 
     this.registerMarkdownPostProcessor((element) => {
       const images = element.querySelectorAll<HTMLImageElement>('img[alt]');
-      for (const img of images) {
+      images.forEach((img) => {
         const rawAlt = img.getAttribute('alt') ?? '';
 
         // Strip size parameters: |N or |NxN
         const cleanedAlt = rawAlt.replace(/\|\d+(?:x\d+)?$/, '').trim();
-        if (!cleanedAlt) continue;
+        if (!cleanedAlt) return;
 
         const parent = img.parentElement;
-        if (!parent) continue;
+        if (!parent) return;
 
         // Avoid double-wrapping
-        if (parent.classList.contains('image-title-figure')) continue;
+        if (parent.classList.contains('image-title-figure')) return;
 
-        const figure = createEl('figure', { cls: 'image-title-figure' });
-        const caption = createEl('figcaption', {
-          cls: 'image-title-caption',
-          text: cleanedAlt,
-        });
+        const figure = document.createElement('figure');
+        figure.className = 'image-title-figure';
+        const caption = document.createElement('figcaption');
+        caption.className = 'image-title-caption';
+        caption.textContent = cleanedAlt;
 
         parent.insertBefore(figure, img);
         figure.appendChild(img);
@@ -41,7 +41,7 @@ export default class ImageTitlePlugin extends Plugin {
         } else {
           figure.appendChild(caption);
         }
-      }
+      });
     });
   }
 

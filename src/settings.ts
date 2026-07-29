@@ -29,7 +29,7 @@ export class ImageTitleSettingTab extends PluginSettingTab {
           .addOption('above', 'Above image')
           .addOption('below', 'Below image')
           .setValue(this.plugin.settings.titlePosition)
-          .onChange(async (value: 'above' | 'below') => {
+          .onChange(async (value) => {
             this.plugin.settings.titlePosition = value;
             await this.plugin.saveSettings();
           }),
