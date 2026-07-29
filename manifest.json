@@ -1,11 +1,9 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
-	"minAppVersion": "1.0.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+  "id": "image-title",
+  "name": "Image Title",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "Render image alt text as visible captions in reading view.",
+  "author": "Ji Gaoqiang",
+  "isDesktopOnly": false
 }
