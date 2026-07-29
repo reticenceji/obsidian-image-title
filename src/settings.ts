@@ -1,38 +1,38 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
-import MyPlugin from './main';
+import type ImageTitlePlugin from './main';
 
-export interface MyPluginSettings {
-	mySetting: string;
+export interface ImageTitleSettings {
+  titlePosition: 'above' | 'below';
 }
 
-export const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default',
+export const DEFAULT_SETTINGS: ImageTitleSettings = {
+  titlePosition: 'below',
 };
 
-export class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+export class ImageTitleSettingTab extends PluginSettingTab {
+  plugin: ImageTitlePlugin;
 
-	constructor(app: App, plugin: MyPlugin) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
+  constructor(app: App, plugin: ImageTitlePlugin) {
+    super(app, plugin);
+    this.plugin = plugin;
+  }
 
-	display(): void {
-		const { containerEl } = this;
+  display(): void {
+    const { containerEl } = this;
+    containerEl.empty();
 
-		containerEl.empty();
-
-		new Setting(containerEl)
-			.setName('Settings #1')
-			.setDesc("It's a secret")
-			.addText((text) =>
-				text
-					.setPlaceholder('Enter your secret')
-					.setValue(this.plugin.settings.mySetting)
-					.onChange(async (value) => {
-						this.plugin.settings.mySetting = value;
-						await this.plugin.saveSettings();
-					}),
-			);
-	}
+    new Setting(containerEl)
+      .setName('Title position')
+      .setDesc('Where to show the image title relative to the image')
+      .addDropdown((dropdown) =>
+        dropdown
+          .addOption('above', 'Above image')
+          .addOption('below', 'Below image')
+          .setValue(this.plugin.settings.titlePosition)
+          .onChange(async (value: 'above' | 'below') => {
+            this.plugin.settings.titlePosition = value;
+            await this.plugin.saveSettings();
+          }),
+      );
+  }
 }
