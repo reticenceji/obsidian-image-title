@@ -1,4 +1,4 @@
-import { Plugin } from 'obsidian';
+import { Plugin, createEl } from 'obsidian';
 import {
   DEFAULT_SETTINGS,
   ImageTitleSettingTab,
