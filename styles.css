@@ -1,8 +1,11 @@
-/*
+.image-title-figure {
+  display: inline-block;
+  margin: 0.5em 0;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
-*/
+.image-title-caption {
+  text-align: center;
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin: 0.3em 0;
+}
